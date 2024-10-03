@@ -1,0 +1,36 @@
+name: Build Android12-5.4 GKI Kernel
+
+on:
+  push:
+    branches:
+      - android12-5.4
+
+jobs:
+  build-kernel:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential bc bison flex libssl-dev \
+          libncurses5-dev crossbuild-essential-arm64 \
+          clang lld curl repo wget zip
+
+    - name: Initialize Repo
+      run: |
+        repo init -u https://git.codelinaro.org/clo/la/kernel/manifest -b aosp-new/common-android12-5.4-lts --depth=1
+
+    - name: Sync Repo
+      run: |
+        repo sync -j$(nproc)
+
+    - name: Build Kernel
+      run: |
+        BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
+
+    - name: Upload Kernel Image as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Image
+        path: out/android12-5.4/dist/Image
