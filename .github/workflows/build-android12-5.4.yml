@@ -32,15 +32,16 @@ jobs:
         tar -xvf weebx-clang.tar.gz -C prebuilts-master/clang/host/linux-x86/clang-weeb
         rm -rf weebx-clang.tar.gz
 
+    - name: Checkout Kernel Patches
+      uses: actions/checkout@v3
+      with:
+        path: patches
+
     - name: Apply Kernel Patches
       run: |
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0001-ANDROID-GKI-Add-Image-and-Image.gz-target.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0002-ANDROID-GKI-Drop-duplicate-Image-target.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0003-kernel-module.c-Force-loading-of-modules-that-fail-s.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0004-kernel-module-Custom-module-blacklist.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0005-kernel-module-Report-the-modules-in-the-blacklist-as.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0006-ANDROID-gki_defconfig-Switch-to-Thin-LTO.patch | patch -d common -p1
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0007-ANDROID-GKI-Compile-with-WeebClang.patch | patch -d common -p1
+        for patch in $PWD/patches/*.patch; do
+          patch -d common -p1 < "$patch"
+        done
 
     - name: Build Kernel
       run: |
@@ -55,5 +56,5 @@ jobs:
     - name: Upload Kernel Image.gz as Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: Image
+        name: Image.gz
         path: out/android12-5.4/dist/Image.gz
