@@ -19,11 +19,11 @@ jobs:
 
     - name: Initialize Repo
       run: |
-        repo init -u https://git.codelinaro.org/clo/la/kernel/manifest -b aosp-new/common-android12-5.4-lts --depth=1
+        repo init -u https://android.googlesource.com/kernel/manifest.git -b common-android12-5.4-lts --depth=1
 
     - name: Sync Repo
       run: |
-        repo sync -j$(nproc)
+        repo sync -c --force-sync
 
     - name: Build Kernel
       run: |
