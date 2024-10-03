@@ -1,0 +1,36 @@
+From 845756ca17a43c2add74f25736850d15b9b046c8 Mon Sep 17 00:00:00 2001
+From: dodyirawan85 <dev.irawans@gmail.com>
+Date: Thu, 3 Oct 2024 14:29:58 +0700
+Subject: [PATCH 2/7] ANDROID: GKI: Drop duplicate `Image` target
+
+* Defined in build.config.aarch64
+
+Change-Id: I0f0e9ff1d747922bd2f543e5e79391ec24281bd9
+Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
+---
+ build.config.gki.aarch64 | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/build.config.gki.aarch64 b/build.config.gki.aarch64
+index 89ae459c0..554756211 100644
+--- a/build.config.gki.aarch64
++++ b/build.config.gki.aarch64
+@@ -3,7 +3,6 @@
+ . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
+ 
+ MAKE_GOALS="${MAKE_GOALS}
+-Image
+ Image.gz
+ Image.lz4
+ "
+@@ -25,7 +24,6 @@ android/abi_gki_aarch64_telechips
+ "
+ 
+ FILES="${FILES}
+-arch/arm64/boot/Image
+ arch/arm64/boot/Image.gz
+ arch/arm64/boot/Image.lz4
+ "
+-- 
+2.34.1
+

@@ -1,0 +1,37 @@
+From a1ac199d1362da572f50ccbc530224fc58d654ef Mon Sep 17 00:00:00 2001
+From: Rama Bondan Prakoso <ramanarubp@gmail.com>
+Date: Sun, 9 Jul 2023 13:20:43 +0000
+Subject: [PATCH 1/7] ANDROID: GKI: Add Image and Image.gz target
+
+Change-Id: Ida0562226a0b0824773d72fe4eae40c325da5c36
+Signed-off-by: Rama Bondan Prakoso <ramanarubp@gmail.com>
+Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
+---
+ build.config.gki.aarch64 | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/build.config.gki.aarch64 b/build.config.gki.aarch64
+index 22ddc9347..89ae459c0 100644
+--- a/build.config.gki.aarch64
++++ b/build.config.gki.aarch64
+@@ -3,6 +3,8 @@
+ . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
+ 
+ MAKE_GOALS="${MAKE_GOALS}
++Image
++Image.gz
+ Image.lz4
+ "
+ 
+@@ -23,6 +25,8 @@ android/abi_gki_aarch64_telechips
+ "
+ 
+ FILES="${FILES}
++arch/arm64/boot/Image
++arch/arm64/boot/Image.gz
+ arch/arm64/boot/Image.lz4
+ "
+ 
+-- 
+2.34.1
+
