@@ -32,15 +32,15 @@ jobs:
         tar -xvf weebx-clang.tar.gz -C prebuilts-master/clang/host/linux-x86/clang-weeb
         rm -rf weebx-clang.tar.gz
 
-    - name: Appy Kernel Patches
+    - name: Apply Kernel Patches
       run: |
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0001-ANDROID-GKI-Add-Image-and-Image.gz-target.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0002-ANDROID-GKI-Drop-duplicate-Image-target.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0003-kernel-module.c-Force-loading-of-modules-that-fail-s.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0004-kernel-module-Custom-module-blacklist.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0005-kernel-module-Report-the-modules-in-the-blacklist-as.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0006-ANDROID-gki_defconfig-Switch-to-Thin-LTO.patch | git -C common am
-        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0007-ANDROID-GKI-Compile-with-WeebClang.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0001-ANDROID-GKI-Add-Image-and-Image.gz-target.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0002-ANDROID-GKI-Drop-duplicate-Image-target.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0003-kernel-module.c-Force-loading-of-modules-that-fail-s.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0004-kernel-module-Custom-module-blacklist.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0005-kernel-module-Report-the-modules-in-the-blacklist-as.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0006-ANDROID-gki_defconfig-Switch-to-Thin-LTO.patch | patch -d common -p1
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0007-ANDROID-GKI-Compile-with-WeebClang.patch | patch -d common -p1
 
     - name: Build Kernel
       run: |
