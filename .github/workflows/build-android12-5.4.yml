@@ -15,7 +15,7 @@ jobs:
         sudo apt-get install -y \
           build-essential bc bison flex libssl-dev \
           libncurses5-dev crossbuild-essential-arm64 \
-          clang lld curl repo wget zip
+          clang lld curl repo tar wget zip
 
     - name: Initialize Repo
       run: |
@@ -24,6 +24,23 @@ jobs:
     - name: Sync Repo
       run: |
         repo sync -c --force-sync
+
+    - name: Initialize Weeb Clang
+      run: |
+        wget "$(curl -s https://raw.githubusercontent.com/XSans0/WeebX-Clang/main/main/link.txt)" -O "weebx-clang.tar.gz"
+        mkdir -p prebuilts-master/clang/host/linux-x86/clang-weeb
+        tar -xvf weebx-clang.tar.gz -C prebuilts-master/clang/host/linux-x86/clang-weeb
+        rm -rf weebx-clang.tar.gz
+
+    - name: Appy Kernel Patches
+      run: |
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0001-ANDROID-GKI-Add-Image-and-Image.gz-target.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0002-ANDROID-GKI-Drop-duplicate-Image-target.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0003-kernel-module.c-Force-loading-of-modules-that-fail-s.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0004-kernel-module-Custom-module-blacklist.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0005-kernel-module-Report-the-modules-in-the-blacklist-as.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0006-ANDROID-gki_defconfig-Switch-to-Thin-LTO.patch | git -C common am
+        curl https://raw.githubusercontent.com/Irawans-Android-Lab/kramel_junk/refs/heads/android12-5.4/0007-ANDROID-GKI-Compile-with-WeebClang.patch | git -C common am
 
     - name: Build Kernel
       run: |
@@ -34,3 +51,9 @@ jobs:
       with:
         name: Image
         path: out/android12-5.4/dist/Image
+
+    - name: Upload Kernel Image.gz as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Image
+        path: out/android12-5.4/dist/Image.gz
