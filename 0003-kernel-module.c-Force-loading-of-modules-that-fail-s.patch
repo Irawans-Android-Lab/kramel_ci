@@ -1,7 +1,7 @@
-From ad532e7421d097a76834f93c0655978c8f4137f2 Mon Sep 17 00:00:00 2001
+From 60a67de9b57e6fdf50e80930b40b6f507571fc7d Mon Sep 17 00:00:00 2001
 From: Pzqqt <821026875@qq.com>
 Date: Mon, 3 Jul 2023 13:02:46 +0800
-Subject: [PATCH 3/7] kernel: module.c: Force loading of modules that fail
+Subject: [PATCH 3/8] kernel: module.c: Force loading of modules that fail
  symbol version checks
 
 - Some kernel changes may break kmi, at which point the kernel will
@@ -22,10 +22,10 @@ Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/kernel/module.c b/kernel/module.c
-index fb4e581dc..5b77d9f2e 100644
+index 93fade94f108..132cb63bb01b 100644
 --- a/kernel/module.c
 +++ b/kernel/module.c
-@@ -1344,9 +1344,9 @@ static int check_version(const struct load_info *info,
+@@ -1352,9 +1352,9 @@ static int check_version(const struct load_info *info,
  	return 1;
  
  bad_version:
@@ -38,5 +38,5 @@ index fb4e581dc..5b77d9f2e 100644
  
  static inline int check_modstruct_version(const struct load_info *info,
 -- 
-2.34.1
+2.46.0
 

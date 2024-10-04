@@ -1,7 +1,7 @@
-From acab2dcc550fa7ef880aab8610e95332281dc670 Mon Sep 17 00:00:00 2001
+From 00b42620ca647356be1a17dccccb6357120fe04d Mon Sep 17 00:00:00 2001
 From: bengris32 <bengris32@protonmail.ch>
 Date: Sun, 22 Sep 2024 20:07:18 +0100
-Subject: [PATCH 6/7] ANDROID: gki_defconfig: Switch to Thin LTO
+Subject: [PATCH 6/8] ANDROID: gki_defconfig: Switch to Thin LTO
 
 * Full LTO takes an unbelivable amount of time (upwards of 30 minutes
   even on good systems). Switching to Thin LTO doesn't break the ABI
@@ -12,21 +12,22 @@ Change-Id: I9fd6f44e5875be9a15166de9c8085637cb3ec3a3
 Signed-off-by: bengris32 <bengris32@protonmail.ch>
 Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
 ---
- arch/arm64/configs/gki_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm64/configs/gki_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm64/configs/gki_defconfig b/arch/arm64/configs/gki_defconfig
-index 0a6b52d09..c65ff828e 100644
+index c79d77da33bc..6887bc27d2d4 100644
 --- a/arch/arm64/configs/gki_defconfig
 +++ b/arch/arm64/configs/gki_defconfig
-@@ -93,7 +93,6 @@ CONFIG_CRYPTO_AES_ARM64_CE_BLK=y
+@@ -94,7 +94,7 @@ CONFIG_CRYPTO_AES_ARM64_CE_BLK=y
  CONFIG_KPROBES=y
  CONFIG_JUMP_LABEL=y
  CONFIG_SHADOW_CALL_STACK=y
--# CONFIG_THINLTO is not set
- CONFIG_LTO_CLANG=y
+-CONFIG_LTO_CLANG_FULL=y
++CONFIG_LTO_CLANG_THIN=y
  CONFIG_CFI_CLANG=y
  CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
 -- 
-2.34.1
+2.46.0
 

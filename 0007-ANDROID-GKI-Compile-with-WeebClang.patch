@@ -1,7 +1,7 @@
-From cda7c6c1b41e558ba0820f301ba7378aef345a25 Mon Sep 17 00:00:00 2001
+From ac08faadba4ae53ee1437dda165178a1c04b8729 Mon Sep 17 00:00:00 2001
 From: dodyirawan85 <dev.irawans@gmail.com>
 Date: Thu, 3 Oct 2024 16:10:45 +0700
-Subject: [PATCH 7/7] ANDROID: GKI: Compile with WeebClang
+Subject: [PATCH 7/8] ANDROID: GKI: Compile with WeebClang
 
 Change-Id: I31c6d667f0527e466d378696bf980ee121872be6
 Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
@@ -10,18 +10,18 @@ Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/build.config.common b/build.config.common
-index 0ebdf1d03..57d8240df 100644
+index 9ec1c637a79f..19cc7cf696b1 100644
 --- a/build.config.common
 +++ b/build.config.common
-@@ -3,7 +3,7 @@ KMI_GENERATION=9
- 
+@@ -4,7 +4,7 @@ KMI_GENERATION=9
  LLVM=1
  DEPMOD=depmod
+ DTC=dtc
 -CLANG_PREBUILT_BIN=prebuilts-master/clang/host/linux-x86/clang-r416183b/bin
 +CLANG_PREBUILT_BIN=prebuilts-master/clang/host/linux-x86/clang-weeb/bin
  BUILDTOOLS_PREBUILT_BIN=build/build-tools/path/linux-x86
  
  KCFLAGS="${KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
 -- 
-2.34.1
+2.46.0
 

@@ -1,7 +1,7 @@
-From 2c48cf375d0ebc5008e13dee4a0a215b04bc7680 Mon Sep 17 00:00:00 2001
+From 96396c897616139a35da94efcfb8935989fbef2a Mon Sep 17 00:00:00 2001
 From: Pzqqt <821026875@qq.com>
 Date: Thu, 28 Sep 2023 14:02:48 +0800
-Subject: [PATCH 4/7] kernel: module: Custom module blacklist
+Subject: [PATCH 4/8] kernel: module: Custom module blacklist
 
 - It does not affect behavior of the default module blacklist.
 
@@ -11,10 +11,10 @@ Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
  1 file changed, 20 insertions(+), 1 deletion(-)
 
 diff --git a/kernel/module.c b/kernel/module.c
-index 5b77d9f2e..532719914 100644
+index 132cb63bb01b..89deca1a4ad1 100644
 --- a/kernel/module.c
 +++ b/kernel/module.c
-@@ -3551,13 +3551,26 @@ int __weak module_frob_arch_sections(Elf_Ehdr *hdr,
+@@ -3565,13 +3565,26 @@ int __weak module_frob_arch_sections(Elf_Ehdr *hdr,
  
  /* module_blacklist is a comma-separated list of module names */
  static char *module_blacklist;
@@ -42,7 +42,7 @@ index 5b77d9f2e..532719914 100644
  
  	for (p = module_blacklist; *p; p += len) {
  		len = strcspn(p, ",");
-@@ -3566,6 +3579,12 @@ static bool blacklisted(const char *module_name)
+@@ -3580,6 +3593,12 @@ static bool blacklisted(const char *module_name)
  		if (p[len] == ',')
  			len++;
  	}
@@ -56,5 +56,5 @@ index 5b77d9f2e..532719914 100644
  }
  core_param(module_blacklist, module_blacklist, charp, 0400);
 -- 
-2.34.1
+2.46.0
 

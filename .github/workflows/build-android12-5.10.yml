@@ -1,9 +1,9 @@
-name: Build Android12-5.4 GKI Kernel
+name: Build Android12-5.10 GKI Kernel
 
 on:
   push:
     branches:
-      - android12-5.4
+      - android12-5.10
 
 jobs:
   build-kernel:
@@ -19,7 +19,7 @@ jobs:
 
     - name: Initialize Repo
       run: |
-        repo init -u https://android.googlesource.com/kernel/manifest.git -b common-android12-5.4-lts --depth=1
+        repo init -u https://android.googlesource.com/kernel/manifest.git -b common-android12-5.10-lts --depth=1
 
     - name: Sync Repo
       run: |
@@ -51,10 +51,10 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Image
-        path: out/android12-5.4/dist/Image
+        path: out/android12-5.10/dist/Image
 
     - name: Upload Kernel Image.gz as Artifact
       uses: actions/upload-artifact@v3
       with:
         name: Image.gz
-        path: out/android12-5.4/dist/Image.gz
+        path: out/android12-5.10/dist/Image.gz

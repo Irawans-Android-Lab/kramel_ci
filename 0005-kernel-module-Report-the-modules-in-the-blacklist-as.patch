@@ -1,7 +1,7 @@
-From 60694c40e31334b50b3d5dd84e2bdaaef8bd4040 Mon Sep 17 00:00:00 2001
+From 48acf2da1a0c0fe02f7072bff9fe4478fdcf9727 Mon Sep 17 00:00:00 2001
 From: Pzqqt <821026875@qq.com>
 Date: Sun, 9 Jul 2023 17:00:42 +0800
-Subject: [PATCH 5/7] kernel: module: Report the modules in the blacklist as
+Subject: [PATCH 5/8] kernel: module: Report the modules in the blacklist as
  successfully loaded
 
 Fix cannot enter Recovery mode.
@@ -14,18 +14,18 @@ Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/kernel/module.c b/kernel/module.c
-index 532719914..1b626b388 100644
+index 89deca1a4ad1..81fcaa8fc865 100644
 --- a/kernel/module.c
 +++ b/kernel/module.c
-@@ -4013,7 +4013,7 @@ static int load_module(struct load_info *info, const char __user *uargs,
+@@ -4047,7 +4047,7 @@ static int load_module(struct load_info *info, const char __user *uargs,
  	 * if it's blacklisted.
  	 */
  	if (blacklisted(info->name)) {
 -		err = -EPERM;
 +		// err = -EPERM;
+ 		pr_err("Module %s is blacklisted\n", info->name);
  		goto free_copy;
  	}
- 
 -- 
-2.34.1
+2.46.0
 

@@ -1,4 +1,4 @@
-From f02f79e91d4072847ef915aa29b88605108fa496 Mon Sep 17 00:00:00 2001
+From b97d4d1a16f3f775856527803cc75afa2ec760fd Mon Sep 17 00:00:00 2001
 From: Adithya R <gh0strider.2k18.reborn@gmail.com>
 Date: Sat, 9 Sep 2023 08:23:45 +0530
 Subject: [PATCH 8/8] gki_defconfig: Disable per-task stackprotector
@@ -17,10 +17,10 @@ Signed-off-by: dodyirawan85 <dev.irawans@gmail.com>
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 5630c53d4..93a46e2f9 100644
+index 41b032380106..d64812737c62 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -1689,8 +1689,9 @@ config CC_HAVE_STACKPROTECTOR_SYSREG
+@@ -1996,8 +1996,9 @@ config CC_HAVE_STACKPROTECTOR_SYSREG
  	def_bool $(cc-option,-mstack-protector-guard=sysreg -mstack-protector-guard-reg=sp_el0 -mstack-protector-guard-offset=0)
  
  config STACKPROTECTOR_PER_TASK
@@ -32,17 +32,17 @@ index 5630c53d4..93a46e2f9 100644
  endmenu
  
 diff --git a/arch/arm64/configs/gki_defconfig b/arch/arm64/configs/gki_defconfig
-index c65ff828e..eee848889 100644
+index 6887bc27d2d4..b1143f61b0e2 100644
 --- a/arch/arm64/configs/gki_defconfig
 +++ b/arch/arm64/configs/gki_defconfig
-@@ -62,6 +62,7 @@ CONFIG_SETEND_EMULATION=y
- # CONFIG_ARM64_VHE is not set
+@@ -64,6 +64,7 @@ CONFIG_SETEND_EMULATION=y
  CONFIG_RANDOMIZE_BASE=y
  # CONFIG_RANDOMIZE_MODULE_REGION_FULL is not set
+ CONFIG_CMDLINE="stack_depot_disable=on kasan.stacktrace=off kvm-arm.mode=protected cgroup_disable=pressure cgroup.memory=nokmem"
 +# CONFIG_STACKPROTECTOR_PER_TASK is not set
- CONFIG_CMDLINE="cgroup_disable=pressure"
  CONFIG_CMDLINE_EXTEND=y
  # CONFIG_DMI is not set
+ CONFIG_PM_WAKELOCKS=y
 -- 
-2.34.1
+2.46.0
 
